@@ -522,6 +522,41 @@ public class Graph {
     };
   } // vertices()
 
+  /**
+   * Finds the shortest path between two points.
+   * 
+   * @param source
+   * @param sink
+   * @return path
+   */
+  public Edge[] shortestPath(int source, int sink) {
+    // add shortest path out of current node that doesn't create a cycle
+    // recalculate total distance from source to vertex
+    // if there is a shorter way to get to X, update the path
+    int[] distances = new int[vertices.length];
+    for (int i = 0; i < distances.length; i++) {
+      distances[i] = Integer.MAX_VALUE;
+    } // for
+    distances[source] = 0;
+    int current = source;
+    while (!isMarked(sink)) {
+
+      // find the closest vertex
+      int smallest = Integer.MAX_VALUE;
+      int closest = current;
+      for (int i = 0; i < distances.length; i++) {
+        if (distances[i] < smallest && !isMarked(i)) {
+          smallest = distances[i];
+          closest = i;
+        } // if
+      } // for
+
+      mark(closest);
+
+      
+    }
+  } // shortestPath(int, int)
+
   // +----------+----------------------------------------------------
   // | Mutators |
   // +----------+
